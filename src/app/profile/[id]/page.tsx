@@ -16,7 +16,6 @@ type UserProfileProps = {
 };
 
 export default function UserProfile({ params, userData }: UserProfileProps) {
-  // Use actual followers or fallback to 100 for example
   const initialFollowers = userData?.followers ?? 100;
   const initialFollowing = userData?.following ?? 50;
 
@@ -27,13 +26,7 @@ export default function UserProfile({ params, userData }: UserProfileProps) {
   const [message, setMessage] = useState("");
 
   const toggleFollow = () => {
-    if (isFollowing) {
-      // Unfollow: decrease count by 1
-      setFollowerCount((prev) => (prev > 0 ? prev - 1 : 0));
-    } else {
-      // Follow: increase count by 1
-      setFollowerCount((prev) => prev + 1);
-    }
+    setFollowerCount((prev) => (isFollowing ? Math.max(prev - 1, 0) : prev + 1));
     setIsFollowing(!isFollowing);
   };
 
@@ -55,7 +48,6 @@ export default function UserProfile({ params, userData }: UserProfileProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0f0f0f] via-[#1a1a1a] to-[#0f0f0f] flex items-center justify-center p-6 font-sans">
       <div className="w-full max-w-2xl rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 shadow-[0_4px_30px_rgba(0,0,0,0.6)] text-white transition-all">
-
         {/* Profile Header */}
         <div className="flex flex-col items-center mb-8">
           <img
@@ -95,9 +87,7 @@ export default function UserProfile({ params, userData }: UserProfileProps) {
         <div className="flex flex-col gap-4">
           <div>
             <h2 className="font-semibold mb-1 text-lg">Contact</h2>
-            <p className="text-gray-300">
-              {userData?.email || `${params.id}@email.com`}
-            </p>
+            <p className="text-gray-300">{userData?.email || `${params.id}@email.com`}</p>
           </div>
 
           {/* Follow Button */}
@@ -134,7 +124,7 @@ export default function UserProfile({ params, userData }: UserProfileProps) {
               placeholder="Type your message..."
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-            ></textarea>
+            />
             <div className="flex justify-end gap-4 mt-4">
               <button
                 onClick={closeModal}
