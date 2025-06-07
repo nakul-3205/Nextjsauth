@@ -60,7 +60,8 @@ Create a .env.local file in the root of your project and add the following:
 
 ini
 Copy
-Edit
+Edit'
+In your .env fike-
 MONGO_URL=your_mongodb_connection_string
 TOKEN_SECRET=your_jwt_secret_key
 EMAIL_USER=your_email_user (for nodemailer)
