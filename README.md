@@ -101,4 +101,6 @@ UI improvements and animations
 
 Add forgot/reset password flow
 
-Use a real email provider (e.g., SendGrid)
+Use a real email provider 
+
+## there are few errors to be fixed soon
